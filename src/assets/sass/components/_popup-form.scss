@@ -10,6 +10,26 @@
     height: 100%;
     overflow: hidden;
     background-color: rgba(0,0,0,0.4);
+    label {
+        color:  #6F767E;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+    }
+    input {
+        border-radius: 8px;
+        border: 1px solid rgba(0, 0, 0, 0.20);
+        outline: none;
+        display: flex;
+        width: 440px;
+        padding: 12px 24px;
+        justify-content: space-between;
+        align-items: center;
+        color: #6F767E;
+        font-size: 18px;
+        line-height: 32px;
+        margin-bottom: 32px;
+    }
     &-dialog {
         padding: 64px 80px;
     }
@@ -35,7 +55,7 @@
     &-content {
         position: relative;
         background-color: #fefefe;
-        margin: 15% auto;
+        margin: 139px auto;
         padding: 64px 80px;
         border-radius: 16px;
         max-width: 600px;
@@ -56,4 +76,22 @@
             padding-bottom: 32px;
         }
     }
+    &-countries {
+        select {
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.20);
+            outline: none;
+            display: flex;
+            width: 440px;
+            padding: 12px 24px;
+            justify-content: space-between;
+            align-items: center;
+            color: #6F767E;
+            font-size: 18px;
+            line-height: 32px;
+            margin-bottom: 32px;
+        }
+    }
+
+
 }    

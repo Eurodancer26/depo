@@ -285,7 +285,7 @@ const modal = (btnSelector, modalSelector, contentModalSelector, open, close) =>
     let div = document.createElement('div');
     div.classList.add('fixScroll');
     div.style.width = '50px';
-    div.style.height = '50px';
+    div.style.height = '0';
     div.style.overflow = 'scroll';
     div.style.visibility = 'hidden';
     document.body.append(div);
