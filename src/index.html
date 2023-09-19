@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/animate.css">
     <script defer src="script.js"></script>
     <title>DEPO</title>
 </head>
@@ -51,17 +52,50 @@
                 </div>
                 <div class="popup-form-body">
                     <h2 class="title title_fz32">Подключить мою страну</h2>
-                    <form action="#" method="get">
+                    <form action="#">
                         <div class="popup-form-countries">
                             <label for="subscribtionCountries">Выберите страну</label>
-                            <select class="popup-form__select" name="select">
-                                <option value="countries" selected>Выберите страну</option>
-                                <option value="Russia">Россия</option>
-                                <option value="Ukraine">Украина</option>
-                                <option value="Türkiye">Турция</option>
-                                <option value="Kazakhstan">Казахстан</option>
-                                <option value="Belarus">Беларусь</option>
-                            </select>
+                            <div class="popup-form__select-wrap">
+                                <select class="popup-form__select" name="select" multiple>
+                                    <option value=""></option>
+                                </select>
+                                <div class="popup-form__select-custom">
+                                    <p>Выберите страну</p>
+                                    <div class="popup-form__caret-down"><img src="icons/arrow/Vector.png" alt="down"></div>
+                                </div>
+                                <div class="popup-form__select-items">
+                                    <div class="popup-form__select-item">
+                                        <div class="popup-form__item-icons">
+                                            <img src="./img/countries/russia.png" alt="russia">
+                                        </div>
+                                        <p>Россия</p>
+                                    </div>
+                                    <div class="popup-form__select-item">
+                                        <div class="popup-form__item-icons">
+                                            <img src="./img/countries/ukraine.png" alt="ukraine">
+                                        </div>
+                                        <p>Украина</p>
+                                    </div>
+                                    <div class="popup-form__select-item">
+                                        <div class="popup-form__item-icons">
+                                            <img src="./img/countries/turkey.png" alt="turkey">
+                                        </div>
+                                        <p>Турция</p>
+                                    </div>
+                                    <div class="popup-form__select-item">
+                                        <div class="popup-form__item-icons">
+                                            <img src="./img/countries/kazakhstan.png" alt="kazakhstan">
+                                        </div>
+                                        <p>Казахстан</p>
+                                    </div>
+                                    <div class="popup-form__select-item">
+                                        <div class="popup-form__item-icons">
+                                            <img src="./img/countries/belarus.png" alt="belarus">
+                                        </div>
+                                        <p>Беларусь</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="popup-form-name">
                             <label for="subscribtionName">Имя</label>
@@ -72,14 +106,45 @@
                             <input type="email" name="email" placeholder="Напишите свой email">
                         </div>
                         <div class="popup-form-footer">
-                            <button type="submit" value="Отправить заявку" class="modal__btn button button_fz18">Отправить заявку</button>
+                            <button type="submit" value="Отправить заявку" class="popup-form__btn button button_fz18">Отправить заявку</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <header class="header">
+    <div class="finally" id="finally">
+        <div class="finally-dialog">
+            <div class="finally-content">
+                <div class="finally-header">
+                    <span class="finally-close">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M18.75 5.25L5.25 18.75" stroke="#6F767E" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M18.75 18.75L5.25 5.25" stroke="#6F767E" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                </div>
+                <div class="finally-body">
+                    <div class="finally__circle-big">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <path d="M20 35C28.2843 35 35 28.2843 35 20C35 11.7157 28.2843 5 20 5C11.7157 5 5 11.7157 5 20C5 28.2843 11.7157 35 20 35Z" stroke="#6FD6BD" stroke-width="3.33333" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M25 16.6667L18.3333 23.3334L15 20.0001" stroke="#6FD6BD" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="finally__text-content">
+                        <h2 class="title title_fz32">Заявка отправлена</h2>
+                        <p>Мы отправим уведомление, когда обменные операции станут доступны в вашей стране</p>
+                    </div>
+                    <div class="finally-footer">
+                        <button class="finally__btn button button_fz18">Понятно</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header class="header" id="up">
         <div class="container">
             <div class="header__h-menu">
                 <div class="header__wrap">
@@ -89,11 +154,11 @@
                     <div class="header__divider"></div>
                     <nav class="header__menu">
                         <ul class="header__list">
-                            <li class="header__item"><a href="#">О нас</a></li>
-                            <li class="header__item"><a href="#">Как это работает</a></li>
-                            <li class="header__item"><a href="#">Где работают</a></li>
-                            <li class="header__item"><a href="#">FAQ</a></li>
-                            <li class="header__item"><a href="#">Контакты</a></li>
+                            <li class="header__item"><a href="#about">О нас</a></li>
+                            <li class="header__item"><a href="#steps">Как это работает</a></li>
+                            <li class="header__item"><a href="#countries">Где работают</a></li>
+                            <li class="header__item"><a href="#faq">FAQ</a></li>
+                            <li class="header__item"><a href="#footer">Контакты</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -187,11 +252,11 @@
             <div class="header__menu-wrap">
                 <div class="header__v-menu">
                     <ul class="header__v-menu--list">
-                        <li class="header__v-menu--item"><a href="#">О нас</a></li>
-                        <li class="header__v-menu--item"><a href="#">Как это работает</a></li>
-                        <li class="header__v-menu--item"><a href="#">Где работают</a></li>
-                        <li class="header__v-menu--item"><a href="#">FAQ</a></li>
-                        <li class="header__v-menu--item"><a href="#">Контакты</a></li>
+                        <li class="header__v-menu--item"><a href="#about">О нас</a></li>
+                        <li class="header__v-menu--item"><a href="#steps">Как это работает</a></li>
+                        <li class="header__v-menu--item"><a href="#countries">Где работают</a></li>
+                        <li class="header__v-menu--item"><a href="#faq">FAQ</a></li>
+                        <li class="header__v-menu--item"><a href="#footer">Контакты</a></li>
                     </ul>
                     <div class="header__v-menu--divider"></div>
                     <div class="header__header__v-menu--lang-bar">
@@ -289,7 +354,7 @@
             </div>
         </section>
 
-        <section class="about">
+        <section class="about" id="about">
             <div class="container">
                 <div class="about__wrap">
                     <div class="about__title">
@@ -310,7 +375,7 @@
             </div>
         </section>
 
-        <section class="steps">
+        <section class="steps" id="steps">
             <div class="container">
                 <div class="steps__content">
                     <div class="steps__wrap">
@@ -380,7 +445,7 @@
             </div>
         </section>
 
-        <section class="countries">
+        <section class="countries" id="countries">
             <div class="container">
                 <div class="countries__content">
                     <div class="countries__lang-bar">
@@ -738,7 +803,7 @@
             </div>
         </section>
 
-        <section class="faq">
+        <section class="faq" id="faq">
             <div class="container">
                 <div class="faq__content">
                     <div class="faq__title">
@@ -828,7 +893,7 @@
             </div>
         </section>
 
-        <footer class="footer">
+        <footer class="footer" id="footer">
             <div class="footer__wrapper">
                 <div class="footer__copyright">© DEPO 2022</div>
                 <div class="footer__links">
@@ -845,6 +910,11 @@
                 </div>
             </div>
         </footer>
+        <a href="#up" class="pageup">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 11L12 14L9 11" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+        </a>
     </main>
 </body>
 

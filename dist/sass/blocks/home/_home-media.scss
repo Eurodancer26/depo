@@ -53,6 +53,12 @@
     .modal {
         overflow-y: scroll;
     }
+    .popup-form {
+        overflow-y: scroll;
+    }
+    .finally {
+        overflow-y: scroll;
+    }
 }
 
 @media (max-width: 576px) {
@@ -132,6 +138,82 @@
         }
         &__btn {
             width: 100%;
+        }
+    }
+    .popup-form {
+        input {
+            margin-bottom: 16px;
+        }
+        &-content {
+            min-width: 288px;
+            padding: 24px;
+            
+        }
+        &-dialog {
+            padding: 64px 16px;
+        }
+        &-body {
+            
+            h2 {
+                width: 188px;
+                font-size: 24px;
+                line-height: 32px;
+            }
+            p {
+                font-size: 16px;
+                line-height: 24px;
+            }
+            input {
+                font-size: 16px;
+                line-height: 24px;
+            }
+        }
+        &__select-wrap {
+            margin-bottom: 16px;
+        }
+        &__btn {
+            width: 100%;
+            font-size: 16px;
+            line-height: 24px;
+        }
+    }
+    .finally {
+        &-content {
+            min-width: 288px;
+            padding: 24px;
+            
+        }
+        &-dialog {
+            padding: 64px 16px;
+        }
+        &-body {
+            h2 {
+                width: 188px;
+                margin: 0 auto;
+                font-size: 24px;
+                line-height: 32px;
+            }
+            p {
+                width: 100%;
+                font-size: 14px;
+                line-height: 24px;
+            }
+
+        }
+        &__circle-big {
+            width: 64px;
+            height: 64px;
+            svg {
+                width: 29px;
+                height: 29px;
+            }
+        }
+        &__text-content {
+            max-width: 240px;
+        }
+        &__btn {
+            font-size: 16px;
+            line-height: 24px;
         }
     }
 }

@@ -6,7 +6,7 @@ const modal = (btnSelector, modalSelector, contentModalSelector, open, close) =>
     function openModal()  {
         setTimeout(() => {
             modal.classList.add(open);
-
+            document.querySelector('.pageup').style.display = 'none';
         },200);
         document.body.style.marginRight = `${scroll}px`;
         document.body.style.overflow = 'hidden';
@@ -20,6 +20,7 @@ const modal = (btnSelector, modalSelector, contentModalSelector, open, close) =>
             document.body.style.overflow = '';
             document.body.style.marginRight = `0px`;
             document.querySelectorAll('.fixScroll').forEach(item => item.style.height = '0px');
+            document.querySelector('.pageup').style.display = '';
         },200);
 
         detachModalEvents();

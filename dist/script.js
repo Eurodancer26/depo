@@ -86,6 +86,81 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/js/components/customSelect.js":
+/*!*******************************************!*\
+  !*** ./src/js/components/customSelect.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const customSelect = () => {
+  const selectCust = document.querySelector('.popup-form__select-custom'),
+    selectText = document.querySelector('.popup-form__select-custom p'),
+    selectItem = document.querySelectorAll('.popup-form__select-item');
+  let timerId;
+  function openSelectCustom(e) {
+    selectItem.forEach(item => {
+      item.style.display = 'flex';
+    });
+    timerId = setTimeout(() => {
+      selectItem.forEach(item => {
+        item.style.opacity = '1';
+      });
+      document.querySelector('.popup-form__select-items').style.opacity = '1';
+    }, 300);
+    document.querySelector('.popup-form__caret-down img').style.transform = 'rotate(0.5turn)';
+    attachSelectEvent();
+  }
+  function closeSelectCustom() {
+    clearTimeout(timerId);
+    selectItem.forEach(item => {
+      item.style.opacity = '0';
+    });
+    document.querySelector('.popup-form__select-items').style.opacity = '0';
+    document.querySelector('.popup-form__caret-down img').style.transform = 'rotate(0)';
+    setTimeout(() => {
+      selectItem.forEach(item => {
+        item.style.display = 'none';
+      });
+    }, 300);
+    detachSelectEvent();
+  }
+  function handleOutside(e) {
+    const isClickOutside = !!e.target.closest('.popup-form__select-item');
+    if (isClickOutside) {
+      selectText.style.opacity = '1';
+      selectText.textContent = e.target.textContent;
+      document.querySelector('option').value = selectText.textContent;
+      console.log(document.querySelector('option').value);
+      closeSelectCustom();
+    }
+  }
+  function attachSelectEvent(e) {
+    selectCust.addEventListener('click', closeSelectCustom);
+    selectItem.forEach(option => {
+      option.addEventListener('click', e => {
+        console.log(e.target);
+        handleOutside(e);
+      });
+    });
+  }
+  function detachSelectEvent() {
+    selectText.style.opacity = '1';
+    selectCust.removeEventListener('click', closeSelectCustom);
+    selectItem.forEach(option => {
+      option.removeEventListener('click', handleOutside);
+    });
+  }
+  selectCust.addEventListener('click', e => {
+    openSelectCustom();
+  });
+};
+/* harmony default export */ __webpack_exports__["default"] = (customSelect);
+
+/***/ }),
+
 /***/ "./src/js/modules/accordion.js":
 /*!*************************************!*\
   !*** ./src/js/modules/accordion.js ***!
@@ -203,9 +278,15 @@ const menu = () => {
   function attachMenuEvents() {
     burger.addEventListener('click', closeMenu);
     document.querySelector('.header__overlay').addEventListener('click', handleOutside);
+    document.querySelectorAll('.header__v-menu--item a').forEach(item => item.addEventListener('click', handleItemMenu));
+  }
+  function handleItemMenu(e) {
+    const isClickItem = !!e.target.closest('.header__v-menu--item a'); //!! даёт true
+    if (isClickItem) {
+      closeMenu();
+    }
   }
   function handleOutside(e) {
-    console.log(!!e.target.closest('.header__overlay'));
     const isClickOutside = !!e.target.closest('.header__overlay'); //!! даёт true
     if (isClickOutside) {
       closeMenu();
@@ -248,6 +329,7 @@ const modal = (btnSelector, modalSelector, contentModalSelector, open, close) =>
   function openModal() {
     setTimeout(() => {
       modal.classList.add(open);
+      document.querySelector('.pageup').style.display = 'none';
     }, 200);
     document.body.style.marginRight = `${scroll}px`;
     document.body.style.overflow = 'hidden';
@@ -261,6 +343,7 @@ const modal = (btnSelector, modalSelector, contentModalSelector, open, close) =>
       document.body.style.overflow = '';
       document.body.style.marginRight = `0px`;
       document.querySelectorAll('.fixScroll').forEach(item => item.style.height = '0px');
+      document.querySelector('.pageup').style.display = '';
     }, 200);
     detachModalEvents();
   }
@@ -298,6 +381,115 @@ const modal = (btnSelector, modalSelector, contentModalSelector, open, close) =>
 
 /***/ }),
 
+/***/ "./src/js/modules/scrolling.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/scrolling.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const scrolling = upSelector => {
+  const upElem = document.querySelector(upSelector);
+  window.addEventListener('scroll', () => {
+    if (document.documentElement.scrollTop > 851) {
+      upElem.classList.add('animated', 'fadeIn');
+      upElem.classList.remove('fadeOut');
+    } else {
+      upElem.classList.add('fadeOut');
+      upElem.classList.remove('fadeIn');
+    }
+  });
+
+  //scrolling with raf (прокрутка с requestAnimationFrame())
+
+  let links = document.querySelectorAll('[href^="#"]'),
+    speed = 0.2;
+  links.forEach(link => {
+    link.addEventListener('click', function (event) {
+      event.preventDefault();
+      let widthTop = document.documentElement.scrollTop,
+        hash = this.hash,
+        toBlock = document.querySelector(hash).getBoundingClientRect().top,
+        start = null;
+      requestAnimationFrame(step);
+      function step(time) {
+        if (start === null) {
+          start = time;
+        }
+        let progress = time - start,
+          r = toBlock < 0 ? Math.max(widthTop - progress / speed, widthTop + toBlock) : Math.min(widthTop + progress / speed, widthTop + toBlock);
+        document.documentElement.scrollTo(0, r);
+        if (r != widthTop + toBlock) {
+          requestAnimationFrame(step);
+        } else {
+          location.hash = hash;
+        }
+      }
+    });
+  });
+
+  //Pure js scrolling(Чистая js прокрутка)
+  // const element = document.documentElement,
+  //       body = document.body;
+
+  // const calcScroll = () => {
+  //     upElem.addEventListener('click', function(event) {
+  //         let scrollTop = Math.round(body.scrollTop || element.scrollTop);
+
+  //         if(this.hash != '') {
+  //             event.preventDefault();
+  //             let hashElement = document.querySelector(this.hash), //getElementById(this.hash.substring(1)) можно и так
+  //                 hashElementTop = 0;
+
+  //             while(hashElementTop.offsetParent) {
+  //                 hashElementTop += hashElement.offsetTop;
+  //                 hashElement = hashElement.offsetParent;
+  //             }
+
+  //             hashElementTop= Math.round(hashElementTop);
+  //             smoothScroll(scrollTop, hashElementTop, this.hash);
+  //         }
+  //     });
+  // };
+
+  // const smoothScroll = (from, to, hash) => {
+  //     let timeInterval = 1,
+  //         prevScrollTop,
+  //         speed;
+
+  //     if (to > from) {
+  //         speed = 30;
+  //     } else {
+  //         speed = -30;
+  //     }
+
+  //     let move = setInterval(function(){
+  //         let scrollTop = Math.round(body.scrollTop || element.scrollTop);
+
+  //         if (
+  //             prevScrollTop === scrollTop || 
+  //             (to > from && scrollTop >= to) || 
+  //             (to < from && scrollTop <= to)
+  //         ) {
+  //             clearInterval(move);
+  //             history.replaceState(history.state, document.title, location.href.replace(/#.*$/g, '') + hash);
+  //         } else {
+  //             body.scrollTop += speed;
+  //             element.scrollTop += speed;
+  //             prevScrollTop = scrollTop;
+  //         }
+  //     },timeInterval);
+  // };
+
+  // calcScroll();
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (scrolling);
+
+/***/ }),
+
 /***/ "./src/js/script.js":
 /*!**************************!*\
   !*** ./src/js/script.js ***!
@@ -311,6 +503,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_hamburgerMenu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/hamburgerMenu */ "./src/js/modules/hamburgerMenu.js");
 /* harmony import */ var _modules_countries__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/countries */ "./src/js/modules/countries.js");
 /* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/accordion */ "./src/js/modules/accordion.js");
+/* harmony import */ var _components_customSelect_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/customSelect.js */ "./src/js/components/customSelect.js");
+/* harmony import */ var _modules_scrolling_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/scrolling.js */ "./src/js/modules/scrolling.js");
+
+
 
 
 
@@ -323,6 +519,8 @@ window.addEventListener('DOMContentLoaded', () => {
   Object(_modules_hamburgerMenu__WEBPACK_IMPORTED_MODULE_1__["default"])();
   Object(_modules_countries__WEBPACK_IMPORTED_MODULE_2__["default"])();
   Object(_modules_accordion__WEBPACK_IMPORTED_MODULE_3__["default"])();
+  Object(_components_customSelect_js__WEBPACK_IMPORTED_MODULE_4__["default"])();
+  Object(_modules_scrolling_js__WEBPACK_IMPORTED_MODULE_5__["default"])('.pageup');
 });
 
 /***/ })

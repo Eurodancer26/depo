@@ -24,11 +24,17 @@ const menu = () => {
     function attachMenuEvents() {
         burger.addEventListener('click', closeMenu);
         document.querySelector('.header__overlay').addEventListener('click', handleOutside);
+        document.querySelectorAll('.header__v-menu--item a').forEach(item => item.addEventListener('click', handleItemMenu));
     }
   
+    function handleItemMenu(e) {
+        const isClickItem = !!e.target.closest('.header__v-menu--item a');//!! даёт true
+        if (isClickItem) {
+            closeMenu();
+        }
+    }
 
     function handleOutside(e) {
-        console.log(!!e.target.closest('.header__overlay'));
         const isClickOutside = !!e.target.closest('.header__overlay');//!! даёт true
         if (isClickOutside) {
             closeMenu();

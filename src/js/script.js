@@ -3,6 +3,8 @@ import modal from './modules/modal';
 import menu from './modules/hamburgerMenu';
 import countries from './modules/countries';
 import accordion from './modules/accordion';
+import customSelect from './components/customSelect.js';
+import scrolling from './modules/scrolling.js';
 
 window.addEventListener('DOMContentLoaded', () => {
     'use strict';
@@ -11,4 +13,6 @@ window.addEventListener('DOMContentLoaded', () => {
     menu();
     countries();
     accordion();
+    customSelect();
+    scrolling('.pageup');
 });
