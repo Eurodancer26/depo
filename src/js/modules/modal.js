@@ -1,4 +1,4 @@
-const modal = (btnSelector, modalSelector, contentModalSelector, open, close) => {
+const modal = (btnSelector ='', modalSelector = '', contentModalSelector = '', open = '', close = '') => {
     const btns = document.querySelectorAll(btnSelector),
           modal = document.getElementById(modalSelector),
           scroll = fixScroll();

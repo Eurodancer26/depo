@@ -42,7 +42,6 @@ const customSelect = () => {
             selectText.style.opacity = '1';
             selectText.textContent = e.target.textContent;
             document.querySelector('option').value = selectText.textContent;
-            console.log(document.querySelector('option').value);
             closeSelectCustom();
         }
     }
@@ -51,7 +50,6 @@ const customSelect = () => {
         selectCust.addEventListener('click', closeSelectCustom);
         selectItem.forEach(option => {
             option.addEventListener('click', (e) => {
-                console.log(e.target);
                 handleOutside(e);
             });
         });

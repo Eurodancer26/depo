@@ -135,7 +135,7 @@
             color: #000;
             font-size: 32px;
             font-weight: 500;
-            padding-bottom: 16px;
+            text-align: center;
         }
         p {
             color: #6F767E;
@@ -154,6 +154,17 @@
             }
         }
     }
-
+    &__status {
+        width: 100%;
+        margin: 0 auto 100px auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            object-fit: cover;
+            margin-right: 70px;
+            width: 100%;
+        }
+    }
 
 }    

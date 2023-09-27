@@ -10,7 +10,7 @@ const gulp = require("gulp"),
       imagemin = require('gulp-imagemin'),
       htmlmin = require('gulp-htmlmin');
 
-// const dist = "/OSPanel/domains/localhost/Car_Musc"; // Ссылка на вашу папку на сервере
+// const dist = "/OSPanel/domains/localhost/Depo";
 const dist = "./dist/";
 
 

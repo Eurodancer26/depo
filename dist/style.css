@@ -299,7 +299,7 @@ template {
 @font-face {
   font-family: "TT Firs Neue";
   src: url("./TTFirsNeue-Medium.eot");
-  src: local("TT Firs Neue Medium"), local("TTFirsNeue-Medium"), url("./TTFirsNeue-Medium.eot?#iefix") format("embedded-opentype"), url("../fonts/TTFirsNeue-Medium.woff2") format("woff2"), url("../fonts/TTFirsNeue-Medium.woff") format("woff"), url("../fonts/TTFirsNeue-Medium.ttf") format("truetype");
+  src: local("TT Firs Neue Medium"), local("TTFirsNeue-Medium"), url("./TTFirsNeue-Medium.eot?#iefix") format("embedded-opentype"), url("fonts/TTFirsNeue-Medium.woff2") format("woff2"), url("fonts/TTFirsNeue-Medium.woff") format("woff"), url("fonts/TTFirsNeue-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
 }
@@ -574,7 +574,7 @@ p {
   color: #000;
   font-size: 32px;
   font-weight: 500;
-  padding-bottom: 16px;
+  text-align: center;
 }
 .popup-form-body p {
   color: #6F767E;
@@ -588,6 +588,18 @@ p {
 }
 .popup-form-countries option:first-child {
   margin-top: 50px;
+}
+.popup-form__status {
+  width: 100%;
+  margin: 0 auto 100px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popup-form__status img {
+  object-fit: cover;
+  margin-right: 70px;
+  width: 100%;
 }
 
 .finally {

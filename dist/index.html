@@ -17,7 +17,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span class="modal-header-close">
+                    <span id="close" class="modal-header-close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M18.75 5.25L5.25 18.75" stroke="#6F767E" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" />
@@ -41,7 +41,7 @@
         <div class="popup-form-dialog">
             <div class="popup-form-content">
                 <div class="popup-form-header">
-                    <span class="popup-form-close">
+                    <span id="close" class="popup-form-close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M18.75 5.25L5.25 18.75" stroke="#6F767E" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" />
@@ -52,14 +52,14 @@
                 </div>
                 <div class="popup-form-body">
                     <h2 class="title title_fz32">Подключить мою страну</h2>
-                    <form action="#">
+                    <form action="/#" method="post">
                         <div class="popup-form-countries">
                             <label for="subscribtionCountries">Выберите страну</label>
                             <div class="popup-form__select-wrap">
-                                <select class="popup-form__select" name="select" multiple>
-                                    <option value=""></option>
+                                <select class="popup-form__select" type="text" name="select" multiple>
+                                    <option value="" selected></option>
                                 </select>
-                                <div class="popup-form__select-custom">
+                                <div required class="popup-form__select-custom">
                                     <p>Выберите страну</p>
                                     <div class="popup-form__caret-down"><img src="icons/arrow/Vector.png" alt="down"></div>
                                 </div>
@@ -99,11 +99,11 @@
                         </div>
                         <div class="popup-form-name">
                             <label for="subscribtionName">Имя</label>
-                            <input type="text" name="name" placeholder="Напишите свое имя ">
+                            <input required type="text" name="name" placeholder="Напишите свое имя ">
                         </div>
                         <div class="popup-form-email">
                             <label for="subscribtionMail">Email</label>
-                            <input type="email" name="email" placeholder="Напишите свой email">
+                            <input required type="email" name="email" placeholder="Напишите свой email">
                         </div>
                         <div class="popup-form-footer">
                             <button type="submit" value="Отправить заявку" class="popup-form__btn button button_fz18">Отправить заявку</button>
@@ -117,7 +117,7 @@
         <div class="finally-dialog">
             <div class="finally-content">
                 <div class="finally-header">
-                    <span class="finally-close">
+                    <span id="close" class="finally-close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M18.75 5.25L5.25 18.75" stroke="#6F767E" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" />
@@ -138,7 +138,7 @@
                         <p>Мы отправим уведомление, когда обменные операции станут доступны в вашей стране</p>
                     </div>
                     <div class="finally-footer">
-                        <button class="finally__btn button button_fz18">Понятно</button>
+                        <button id="btn-finally" class="finally__btn button button_fz18">Понятно</button>
                     </div>
                 </div>
             </div>

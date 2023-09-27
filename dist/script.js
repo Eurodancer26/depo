@@ -133,7 +133,6 @@ const customSelect = () => {
       selectText.style.opacity = '1';
       selectText.textContent = e.target.textContent;
       document.querySelector('option').value = selectText.textContent;
-      console.log(document.querySelector('option').value);
       closeSelectCustom();
     }
   }
@@ -141,7 +140,6 @@ const customSelect = () => {
     selectCust.addEventListener('click', closeSelectCustom);
     selectItem.forEach(option => {
       option.addEventListener('click', e => {
-        console.log(e.target);
         handleOutside(e);
       });
     });
@@ -247,6 +245,109 @@ const countries = () => {
 
 /***/ }),
 
+/***/ "./src/js/modules/forms.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/forms.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _services_requests__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/requests */ "./src/js/services/requests.js");
+
+const forms = () => {
+  const form = document.querySelectorAll('form'),
+    inputs = document.querySelectorAll('input'),
+    option = document.querySelector('option');
+  const message = {
+    loading: 'Загрузка...',
+    success: `
+            <div class="finally-body">
+                <div class="finally__circle-big">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <path d="M20 35C28.2843 35 35 28.2843 35 20C35 11.7157 28.2843 5 20 5C11.7157 5 5 11.7157 5 20C5 28.2843 11.7157 35 20 35Z" stroke="#6FD6BD" stroke-width="3.33333" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M25 16.6667L18.3333 23.3334L15 20.0001" stroke="#6FD6BD" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="finally__text-content">
+                    <h2 class="title title_fz32">Заявка отправлена</h2>
+                    <p>Мы отправим уведомление, когда обменные операции станут доступны в вашей стране</p>
+                </div>
+            </div>
+        `,
+    failure: 'Что-то пощло не так',
+    optionREdText: 'Выберите страну для дальнейшего подключение!!!',
+    spinner: 'img/gg.gif',
+    ok: '',
+    fail: 'img/fail.gif'
+  };
+  const path = {
+    question: 'question.php'
+  };
+  const clearInputs = () => {
+    inputs.forEach(input => {
+      input.value = '';
+    });
+  };
+  form.forEach(item => {
+    item.addEventListener('submit', e => {
+      e.preventDefault();
+      if (option.value === '') {
+        document.querySelector('.popup-form__select-custom').style.borderColor = 'red';
+        document.querySelector('.popup-form__select-custom').insertAdjacentHTML('afterend', `
+                    <p class="redText" style="color: red; font-size: 16px">${message.optionREdText}</p>
+                `);
+        e.preventDefault();
+      } else {
+        let statusMessage = document.createElement('div');
+        statusMessage.classList.add('popup-form__status');
+        item.parentNode.append(statusMessage);
+        item.classList.add('animated', 'fadeOutUp');
+        setTimeout(() => {
+          item.style.display = 'none';
+        }, 400);
+        let statusImg = document.createElement('img');
+        statusImg.setAttribute('src', message.spinner);
+        statusImg.classList.add('animated', 'fadeInUp');
+        statusMessage.append(statusImg);
+        let textMessage = document.createElement('div');
+        statusMessage.appendChild(textMessage);
+        const formData = new FormData(item);
+        const api = 'https://test-4abc2-default-rtdb.firebaseio.com/goods';
+        Object(_services_requests__WEBPACK_IMPORTED_MODULE_0__["postData"])(api, formData).then(res => {
+          statusImg.remove();
+          document.querySelector('.popup-form-body h2').textContent = '';
+          statusMessage.insertAdjacentHTML('beforeend', message.success);
+        }).catch(err => {
+          statusImg.setAttribute('src', message.fail);
+          textMessage.textContent = message.failure;
+        }).finally(() => {
+          clearInputs();
+          setTimeout(() => {
+            const redText = !!document.querySelector('.redText');
+            document.querySelector('.popup-form-body h2').textContent = 'Подключить мою страну';
+            statusMessage.remove();
+            item.style.display = 'block';
+            item.classList.remove('fadeOutUp');
+            item.classList.add('fadeinUp');
+            document.querySelector('.popup-form__select-custom p').textContent = '';
+            document.querySelector('.popup-form__select-custom p').textContent = 'Выберите страну';
+            option.value = '';
+            document.querySelector('.popup-form__select-custom').style.borderColor = '';
+            if (redText) {
+              document.querySelector('.redText').remove();
+            }
+          }, 5000);
+        });
+      }
+    });
+  });
+};
+/* harmony default export */ __webpack_exports__["default"] = (forms);
+
+/***/ }),
+
 /***/ "./src/js/modules/hamburgerMenu.js":
 /*!*****************************************!*\
   !*** ./src/js/modules/hamburgerMenu.js ***!
@@ -322,7 +423,12 @@ const menu = () => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-const modal = (btnSelector, modalSelector, contentModalSelector, open, close) => {
+const modal = function () {
+  let btnSelector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  let modalSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  let contentModalSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  let open = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+  let close = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
   const btns = document.querySelectorAll(btnSelector),
     modal = document.getElementById(modalSelector),
     scroll = fixScroll();
@@ -503,8 +609,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_hamburgerMenu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/hamburgerMenu */ "./src/js/modules/hamburgerMenu.js");
 /* harmony import */ var _modules_countries__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/countries */ "./src/js/modules/countries.js");
 /* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/accordion */ "./src/js/modules/accordion.js");
-/* harmony import */ var _components_customSelect_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/customSelect.js */ "./src/js/components/customSelect.js");
-/* harmony import */ var _modules_scrolling_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/scrolling.js */ "./src/js/modules/scrolling.js");
+/* harmony import */ var _components_customSelect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/customSelect */ "./src/js/components/customSelect.js");
+/* harmony import */ var _modules_scrolling__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/scrolling */ "./src/js/modules/scrolling.js");
+/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
+
 
 
 
@@ -514,14 +622,37 @@ __webpack_require__.r(__webpack_exports__);
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
-  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_0__["default"])('#btn-app', 'modal', '.modal-content', 'modal_open', '.modal-header-close');
-  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_0__["default"])('#btn-countries', 'popup-form', '.popup-form-content', 'popup-form_open', '.popup-form-close');
+  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_0__["default"])('#btn-app', 'modal', '.modal-content', 'modal_open', '#close');
+  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_0__["default"])('#btn-countries', 'popup-form', '.popup-form-content', 'popup-form_open', '#close');
   Object(_modules_hamburgerMenu__WEBPACK_IMPORTED_MODULE_1__["default"])();
   Object(_modules_countries__WEBPACK_IMPORTED_MODULE_2__["default"])();
   Object(_modules_accordion__WEBPACK_IMPORTED_MODULE_3__["default"])();
-  Object(_components_customSelect_js__WEBPACK_IMPORTED_MODULE_4__["default"])();
-  Object(_modules_scrolling_js__WEBPACK_IMPORTED_MODULE_5__["default"])('.pageup');
+  Object(_components_customSelect__WEBPACK_IMPORTED_MODULE_4__["default"])();
+  Object(_modules_scrolling__WEBPACK_IMPORTED_MODULE_5__["default"])('.pageup');
+  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_6__["default"])();
 });
+
+/***/ }),
+
+/***/ "./src/js/services/requests.js":
+/*!*************************************!*\
+  !*** ./src/js/services/requests.js ***!
+  \*************************************/
+/*! exports provided: postData */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postData", function() { return postData; });
+const postData = async (url, data) => {
+  // document.querySelector('.status').textContent = message.loading; //не нужно сообщение загрузка так как будет spinner
+  let res = await fetch(url, {
+    method: "POST",
+    body: data.forEach(item => console.log(item))
+  });
+  return await res.text();
+};
+
 
 /***/ })
 
