@@ -1025,6 +1025,9 @@ p {
   width: 121px;
   height: 24px;
 }
+.home__arrowdown:hover {
+  text-decoration: none;
+}
 .home__arrowdown-icon {
   display: inline-flex;
   justify-content: center;
